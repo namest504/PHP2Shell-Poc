@@ -1,0 +1,16 @@
+FROM php:8.4.4-apache-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    procps curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/lib/php/sessions \
+    && chown www-data:www-data /var/lib/php/sessions \
+    && chmod 1733 /var/lib/php/sessions
+
+RUN a2enmod cgi
+
+COPY php.ini /usr/local/etc/php/php.ini
+
+EXPOSE 80
+CMD ["apache2-foreground"]

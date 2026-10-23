@@ -1,0 +1,18 @@
+services:
+  php2shell-asan:
+    build:
+      context: .
+      dockerfile: Dockerfile.asan
+    container_name: php2shell-asan
+    ports:
+      - "127.0.0.1:8083:80"
+    volumes:
+      - ./www:/var/www/html
+    environment:
+      - ASAN_OPTIONS=detect_leaks=0:abort_on_error=0:log_path=/var/log/asan/report:print_stacktrace=1:halt_on_error=0
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost/index.php"]
+      interval: 10s
+      timeout: 3s
+      start_period: 30s
+      retries: 3

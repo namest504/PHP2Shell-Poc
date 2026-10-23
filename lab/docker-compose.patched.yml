@@ -1,0 +1,11 @@
+services:
+  php2shell-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.patched
+    container_name: php2shell-lab
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./www:/var/www/html
+    restart: unless-stopped

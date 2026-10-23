@@ -1,0 +1,15 @@
+services:
+  php2shell-modphp:
+    build:
+      context: .
+      dockerfile: Dockerfile.modphp
+    container_name: php2shell-modphp
+    ports:
+      - "127.0.0.1:8082:80"
+    volumes:
+      - ./www:/var/www/html
+    security_opt:
+      - apparmor:unconfined
+    cap_add:
+      - SYS_PTRACE
+    restart: unless-stopped

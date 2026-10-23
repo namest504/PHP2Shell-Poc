@@ -1,0 +1,17 @@
+*.log
+.env
+.env.*
+!.env.example
+
+/core
+/core.*
+*.core
+.DS_Store
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+*.tmp
+*.bak
